@@ -3,56 +3,68 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="row">
-    <ul class="course">
+
+
+<table class="table" style="margin-top:100px;margin-bottom:500px">
+    <thead style="font-size:large;font-weight:bold">
+        <tr class="row">
+            <td class="col-md-2">Ngày tháng</td>
+            <td class="col-md-5">Giảng viên</td>
+            <td class="col-md-5">Tên khóa</td>
+        </tr>
+    </thead>
+    <tbody style="font-size:medium">
         @foreach (var course in Model.UpcommingCourses)
         {
-            <li>
-                <div class="date">
-                    <div class="month">
-                        @course.DateTime.ToString("MM")
+            <tr class="row">
+                <td class="col-md-3">
+                    <div class="date">
+                        <span class="month"></span> @course.DateTime.ToString("MM")-
+                        <span class="day">@course.DateTime.ToString("dd")</span>
                     </div>
-                    <div class="day">
-                        @course.DateTime.ToString("dd")
+                </td>
+                <td class="col-md-4">
+                    <div class="details">
+                        <span class="lecturer">
+                            @course.Lecturer.Name
+                            @if (Model.ShowAction)
+                            {
+                                if (Model.Followings.Any(x => x.FolloweeId == course.Lecturer.Id))
+                                {
+                                    <button data-user-id="@course.LecturerId" class="btn btn-default  js-toggle-follow">Following?</button>
+                                }
+                                else
+                                {
+                                    <button data-user-id="@course.LecturerId" class="btn btn-success js-toggle-follow">Follow?</button>
+                                }
+
+                            }
+                        </span>
                     </div>
-                </div>
-                <div class="details">
-                    <span class="lecturer">
-                        @course.Lecturer.Name
-                        @if (Model.ShowAction)
-                        {
-                            if (Model.Followings.Any(x => x.FolloweeId == course.Lecturer.Id))
+                </td>
+                <td class="col-md-5">
+                    <div class="details">
+                        <span class="category">
+                            @course.Category.Name
+                            @if (Model.ShowAction)
                             {
-                                <button data-user-id="@course.LecturerId" class="btn btn-default btn-sm js-toggle-follow">Following?</button>
+                                if (Model.Attendances.Any(x => x.CourseId == course.Id))
+                                {
+                                    <button data-course-id="@course.Id" class="btn btn-info">Học?</button>
+                                }
+                                else
+                                {
+                                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Không Học?</button>
+                                }
                             }
-                            else
-                            {
-                                <button data-user-id="@course.LecturerId" class="btn btn-default btn-sm js-toggle-follow">Follow?</button>
-                            }
-
-                        }
-                    </span>
-                    <span class="category">
-                        @course.Category.Name
-                        @if (Model.ShowAction)
-                        {
-                            if (Model.Attendances.Any(x => x.CourseId == course.Id))
-                            {
-                                <button data-course-id="@course.Id" class="btn btn-sm btn-info">Going?</button>
-                            }
-                            else
-                            {
-                                <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
-                            }
-                        }
-                    </span>
-                </div>
-
-            </li>
+                        </span>
+                    </div>
+                </td>
+            </tr>
         }
+    </tbody>
+</table>
 
-    </ul>
-</div>
 
 @section scripts{
     <script>

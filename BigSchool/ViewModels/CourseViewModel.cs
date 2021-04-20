@@ -13,7 +13,7 @@ namespace BigSchool.ViewModels
         [Required]
         public String Place { get; set; }
         [Required]
-        [FutureDate]
+        //[FutureDate]
         public String Date { get; set; }
         [Required]
         [ValidTime]

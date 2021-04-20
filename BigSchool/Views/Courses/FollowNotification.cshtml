@@ -3,16 +3,22 @@
     ViewBag.Title = "Notification Page";
 }
 
-<div class="row">
-    <ul class="course">
-        @foreach (var follow in Model.Notifications)
-        {
-            <li>
-                <span class="lecturer">
-                    @follow.Logger
-                    <br />
-                </span>
-            </li>
-        }
-    </ul>
+<div class="text-center">
+    <h1>Thông báo</h1>
+    <div class="table-bordered" style="font-size:large;margin-top:200px;margin-bottom:400px;padding-top:50px">
+        <div class="row">
+            <ul class="course">
+                @foreach (var follow in Model.Notifications)
+                {
+                    <li>
+                        <span class="lecturer">
+                            @follow.Logger
+                            <br />
+                        </span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
 </div>

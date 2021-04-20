@@ -4,7 +4,31 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="row">
+<div class="text-center">
+    <h1>Follow</h1>
+    <div class="table-bordered" style="font-size:large;margin-top:200px;margin-bottom:400px;padding-top:50px">
+        <div class="row">
+            <ul class="course">
+                @foreach (var follow in Model.Followings)
+                {
+                    <li>
+                        <div class="details">
+                            <span class="lecturer">
+                                @follow.Name
+                            </span>
+                        </div>
+                        <a href="#" data-followee-id="@follow.Id" data-follower-id="@User.Identity.GetUserId()" class="js-unfollow">UnFollow</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+
+@*<div class="row">
     <ul class="course">
         @foreach (var follow in Model.Followings)
         {
@@ -18,7 +42,7 @@
             </li>
         }
     </ul>
-</div>
+</div>*@
 
 @section scripts{
     <script>

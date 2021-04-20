@@ -1,6 +1,54 @@
 ﻿@model IEnumerable<BigSchool.Models.Course>
 
-<div class="row">
+
+
+<table class="table" style="margin-top:100px;margin-bottom:500px">
+    <thead style="font-size:large;font-weight:bold">
+        <tr class="row">
+            <td class="col-md-2">Ngày tháng</td>
+            <td class="col-md-4">Giảng viên</td>
+            <td class="col-md-5">Tên khóa</td>
+            <td class="col-md-1"></td>
+        </tr>
+    </thead>
+    <tbody style="font-size:medium">
+        @foreach (var course in Model)
+        {
+            <tr class="row">
+                <td class="col-md-3">
+                    <div class="date">
+                        <span class="month"></span> @course.DateTime.ToString("MM")-
+                        <span class="day">@course.DateTime.ToString("dd")</span>
+                    </div>
+                </td>
+                <td class="col-md-4">
+                    <div class="details">
+                        <span class="lecturer">
+                            @course.Lecturer.Name
+                        </span>
+                    </div>
+                </td>
+                <td class="col-md-5">
+                    <div class="details">
+                        <span class="category">
+                            @course.Category.Name
+                        </span>
+                    </div>
+                </td>
+                <td class="col-md-1">
+                    <div class="action">
+                        <a href="@Url.Action("Edit","Courses", new { id = course.Id })">Edit</a> |
+                        <a data-course-id="@course.Id" href="#" class="js-cancel-course">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@*<div class="row">
     <ul class="course">
         @foreach (var course in Model)
             {
@@ -30,7 +78,7 @@
         }
 
     </ul>
-</div>
+</div>*@
 
 @section scripts{
     <script>

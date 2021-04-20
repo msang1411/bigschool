@@ -3,6 +3,29 @@
     ViewBag.Title = "Following Me";
 }
 
+
+<div class="text-center">
+    <h1>Follow</h1>
+    <div class="table-bordered" style="font-size:large;margin-top:200px;margin-bottom:400px;padding-top:50px">
+        <div class="row">
+            <ul class="course">
+                @foreach (var follow in Model.Followings)
+                {
+                    <li>
+                        <div class="details">
+                            <span class="lecturer">
+                                @follow.Name
+                            </span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+@*
 <div class="row">
     <ul class="course">
         @foreach (var follow in Model.Followings)
@@ -16,4 +39,4 @@
             </li>
         }
     </ul>
-</div>
+</div>*@
